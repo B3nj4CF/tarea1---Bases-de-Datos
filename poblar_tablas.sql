@@ -256,7 +256,8 @@ BEGIN
         SELECT id_estado INTO est FROM estado WHERE nombre_estado <> 'Archivado' ORDER BY random() LIMIT 1;
         SELECT id_topico INTO top FROM topico ORDER BY random() LIMIT 1;
         SELECT id_ambiente INTO amb FROM ambiente_desarrollo ORDER BY random() LIMIT 1;
-        f := rand_date('2020-01-01','2024-09-01');
+        
+        f := DATE '2021-01-01' + (random() * (CURRENT_DATE - DATE '2021-01-01'))::int;
 
         INSERT INTO solicitud_funcionalidad(
             titulo_funcionalidad,id_estado,resumen_funcionalidad,
