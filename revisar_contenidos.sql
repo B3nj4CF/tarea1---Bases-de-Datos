@@ -1,5 +1,5 @@
--- revisar_contenidos.sql
--- Este archivo selecciona todo el contenido de las tablas para revisión
+-- Este archivo selecciona todo el contenido de las tablas para la revisión
+-- Imprime cada tabla con un encabezado indicando el nombre de la tabla
 
 SELECT '===== Tabla: usuario =====' AS info;
 SELECT * FROM usuario;

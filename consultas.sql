@@ -67,7 +67,6 @@ WHERE EXISTS (
 -- Verificación de funcionalidades actualizadas a “Archivado”
 -- =====================================
 
--- Mostrar funcionalidades con más de 3 años, con el estado anterior y el estado actualizado
 SELECT 
     f.id_funcionalidad, 
     f.titulo_funcionalidad, 
@@ -80,7 +79,7 @@ JOIN
     estado e_ant ON f.id_estado = e_ant.id_estado
 WHERE 
     f.fecha_publicacion <= CURRENT_DATE - INTERVAL '3 YEAR'
-    AND (e_ant.nombre_estado != 'Archivado' OR e_ant.nombre_estado IS NULL);  -- Mostrar si no está 'Archivado' o es NULL
+    AND (e_ant.nombre_estado != 'Archivado' OR e_ant.nombre_estado IS NULL);
 
 -- =====================================
 -- Cantidad de ingenieros especialistas por tópico (formato: "Topico: N")
@@ -107,7 +106,7 @@ SELECT i.nombre_ingeniero
 FROM ingeniero i
 JOIN ingeniero_especialidad ie ON i.rut_ingeniero = ie.rut_ingeniero
 JOIN especialidad e ON ie.id_especialidad = e.id_especialidad
-WHERE e.nombre_especialidad = 'Seguridad';
+WHERE e.nombre_especialidad = 'Seguridad'; -- Cambiar 'Seguridad' por el tópico que quieres buscar
 
 -- =====================================
 -- Cantidad total de solicitudes creadas por cada usuario

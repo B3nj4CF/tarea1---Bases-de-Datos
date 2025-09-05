@@ -39,12 +39,12 @@ INSERT INTO ambiente_desarrollo (nombre_ambiente) VALUES
 -- =====================
 TRUNCATE estado RESTART IDENTITY CASCADE;
 
-    INSERT INTO estado (nombre_estado) VALUES
-    ('Abierto'),
-    ('En Progreso'),
-    ('Resuelto'),
-    ('Cerrado'),
-    ('Archivado');
+INSERT INTO estado (nombre_estado) VALUES
+('Abierto'),
+('En Progreso'),
+('Resuelto'),
+('Cerrado'),
+('Archivado');
 
 
 -- 50 usuarios
@@ -169,7 +169,7 @@ DECLARE
     elegidos INT[];
 BEGIN
     FOR ing IN SELECT rut_ingeniero FROM ingeniero LOOP
-        cantidad := 1 + floor(random()*2)::INT; -- 1 o 2
+        cantidad := 1 + floor(random()*2)::INT;
         elegidos := ARRAY[]::INT[];
 
         WHILE array_length(elegidos,1) IS DISTINCT FROM cantidad LOOP
