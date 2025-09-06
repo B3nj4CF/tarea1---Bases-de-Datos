@@ -55,6 +55,7 @@ Para ejecutar correctamente la tarea y trabajar con la base de datos en PostgreS
     ```
 
 ### Nota Importante
+
 - En la solicitud de `Eliminar solicitudes de error con más de 5 años` (La cual se encuentra al final del archivo), esta se encuentra comentada ya que elimina los datos del años solicita, lo que borra datos que se encuentran en las tablas anteriores y posteriores.
 - Se recomienda ejecutar `consultas.sql` tal como viene por defecto y luego repetir los pasos `2.-`, `3.-`, `4.-` nuevamente, pero descomentando la sección previamente mencionada.
 - Así, el código elimina las solicitudes de más de 5 años y funciona de la mejor manera.
@@ -65,4 +66,5 @@ Para ejecutar correctamente la tarea y trabajar con la base de datos en PostgreS
 - Asegúrese de ejecutar los archivos en el orden indicado para evitar errores de dependencias entre tablas y datos.
 - Dentro de `consultas.sql` en la consulta de `Ingenieros especialistas en un tópico específico (ej. 'Seguridad')` se encuentra la siguiente linea `WHERE e.nombre_especialidad = 'Seguridad'` se puede remplazar seguridad por `Backend`, `UX/UI`, `Mobile`, `Frontend`
 - - Dentro de `consultas.sql` en la consulta de `Funcionalidades nuevas para el ambiente “Móvil”` se encuentra la siguiente linea `WHERE a.nombre_ambiente = 'Movil'` se puede remplazar Movil por `Web`, `Movil`, `Escritorio`, `Cloud`
+- Se recomienda la extencion de VSCode `PostgreSQL` de microsoft ya que esta permite visualizar de manera facil las tablas que crean las consultas
 ---

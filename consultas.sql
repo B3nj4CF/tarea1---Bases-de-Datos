@@ -120,25 +120,20 @@ SELECT u.nombre_usuario,
 FROM usuario u;
 
 -- =====================================
--- Eliminar solicitudes de error con más de 5 anos y mostrar en terminal
+-- Eliminar solicitudes de error con más de 5 anos
 -- =====================================
 
--- SELECT '===== Tabla: Eliminar solicitudes de error con mas de 5 anos y mostrar en terminal =====' AS info;
-
--- -- Eliminar y mostrar los errores antiguos (más de 5 años y no archivados)
-
+-- SELECT '===== Tabla: Eliminar solicitudes de error con mas de 5 anos  =====' AS info;
 
 -- DELETE FROM asignar_error
 -- WHERE id_error IN (
 --     SELECT id_error
 --     FROM solicitud_error
 --     WHERE fecha_publicacion <= CURRENT_DATE - INTERVAL '5 YEAR'
---       AND id_estado IN (SELECT id_estado FROM estado WHERE nombre_estado != 'Archivado')
 -- );
 
 -- DELETE FROM solicitud_error
 -- USING estado e_ant
 -- WHERE solicitud_error.id_estado = e_ant.id_estado
 --     AND solicitud_error.fecha_publicacion <= CURRENT_DATE - INTERVAL '5 YEAR'
---     AND e_ant.nombre_estado != 'Archivado'
 -- RETURNING solicitud_error.id_error, solicitud_error.titulo_error, solicitud_error.fecha_publicacion;
