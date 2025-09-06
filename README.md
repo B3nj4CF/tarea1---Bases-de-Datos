@@ -19,8 +19,8 @@ Para ejecutar correctamente la tarea y trabajar con la base de datos en PostgreS
 
 - Asegúrese de tener instalado PostgreSQL 17.6 en su sistema.
 - Ubique los siguientes archivos en una misma carpeta:
-    - `crear_tablas.sql`
-    - `poblar_tablas.sql`
+    - `CREATE.sql`
+    - ``Script.sql`
     - `consultas.sql`
     - `revisar_contenidos.sql` (opcional)
 
@@ -28,14 +28,14 @@ Para ejecutar correctamente la tarea y trabajar con la base de datos en PostgreS
 
 - Abra la terminal de PostgreSQL (puedes usar `psql`).
 - Navegue hasta la carpeta donde están los archivos `.sql`.
-- Ejecute el archivo `crear_tablas.sql` para crear todas las tablas y triggers necesarios en la base de datos:
+- Ejecute el archivo `CREATE.sql` para crear todas las tablas y triggers necesarios en la base de datos:
     ```bash
     \i crear_tablas.sql
     ```
 
 ### 3. Población de Tablas
 
-- Una vez creadas las tablas y los triggers, ejecute el archivo `poblar_tablas.sql` para insertar los datos iniciales:
+- Una vez creadas las tablas y los triggers, ejecute el archivo `Script.sql` para insertar los datos iniciales:
     ```bash
     \i poblar_tablas.sql
     ```
@@ -67,4 +67,6 @@ Para ejecutar correctamente la tarea y trabajar con la base de datos en PostgreS
 - Dentro de `consultas.sql` en la consulta de `Ingenieros especialistas en un tópico específico (ej. 'Seguridad')` se encuentra la siguiente linea `WHERE e.nombre_especialidad = 'Seguridad'` se puede remplazar seguridad por `Backend`, `UX/UI`, `Mobile`, `Frontend`
 - - Dentro de `consultas.sql` en la consulta de `Funcionalidades nuevas para el ambiente “Móvil”` se encuentra la siguiente linea `WHERE a.nombre_ambiente = 'Movil'` se puede remplazar Movil por `Web`, `Movil`, `Escritorio`, `Cloud`
 - Se recomienda la extencion de VSCode `PostgreSQL` de microsoft ya que esta permite visualizar de manera facil las tablas que crean las consultas
+- El `Script.sql` realiza todo de manera automatica al momneto de la ejecucion, por ende si se desean agregar datos manuales, en ese caso, el codigo tendra una falla, ya que no se le asignara a otra tabla. (insertar usuario, no creara solicitud) a menos que se haga modificanco las listas usuario e ingeniero en `Script.sql`
+- En el`Script.sql` al final aparece el apartaado `INYECCION DE 25 SOLICITUDES DE FUNCIONALIDAD Y 25 DE ERROR EN EL MISMO DIA` este apartado fue creado para verificar el maximo de solicitudes por dia (25 + 25), si descomentas ese apartado y luego repetir los pasos `2.-`, `3.-`, `4.-` nuevamente, salta el error de `El usuario 21836702-0 ya ha realizado 25 solicitudes de funcionalidad hoy.` comprobado que funciona el codigo.
 ---

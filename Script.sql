@@ -336,3 +336,173 @@ BEGIN
         END LOOP;
     END LOOP;
 END$$;
+
+-- =====================================
+-- ESTE APARTADO ES SOLO PARA PRUEBA DE EL LIMITE DE 50 SOLICITUDES POR DIA
+-- =====================================
+
+-- =====================================
+-- INYECCION DE 25 SOLICITUDES DE FUNCIONALIDAD Y 25 DE ERROR EN EL MISMO DIA
+-- =====================================
+
+-- DO $$ 
+-- DECLARE 
+--     i INT;
+--     est INT;
+--     top INT;
+--     amb INT;
+--     f DATE := CURRENT_DATE;
+--     titulo_error TEXT;
+-- BEGIN
+--     -- Insertar el usuario con el RUT 21836702-0
+--     INSERT INTO usuario (rut_usuario, nombre_usuario, email_usuario)
+--     VALUES ('21836702-0', 'Chanchito Prueba', 'Chanchito.Prueba@email.com');
+    
+--     -- Inserción de 25 solicitudes de funcionalidad
+--     FOR i IN 1..25 LOOP
+--         SELECT id_estado INTO est 
+--         FROM estado 
+--         WHERE nombre_estado <> 'Archivado' 
+--         ORDER BY random() LIMIT 1;
+
+--         SELECT id_topico INTO top FROM topico ORDER BY random() LIMIT 1;
+--         SELECT id_ambiente INTO amb FROM ambiente_desarrollo ORDER BY random() LIMIT 1;
+
+--         INSERT INTO solicitud_funcionalidad(
+--             titulo_funcionalidad, 
+--             id_estado, 
+--             resumen_funcionalidad,
+--             id_topico, 
+--             rut_usuario, 
+--             id_ambiente, 
+--             fecha_publicacion
+--         ) 
+--         VALUES(
+--             'Funcionalidad EXTRA DE PRUEBA ' || i || ' con título suficientemente largo',
+--             est,
+--             'Resumen de funcionalidad EXTRA DE PRUEBA ' || i,
+--             top, 
+--             '21836702-0',
+--             amb,
+--             f
+--         );
+--     END LOOP;
+
+--     -- Inserción de 25 solicitudes de error
+--     FOR i IN 1..25 LOOP
+--         SELECT id_estado INTO est 
+--         FROM estado 
+--         WHERE nombre_estado <> 'Archivado' 
+--         ORDER BY random() LIMIT 1;
+
+--         SELECT id_topico INTO top FROM topico ORDER BY random() LIMIT 1;
+
+--         -- Generar un título de error único (añadir un sufijo aleatorio)
+--         titulo_error := 'Error EXTRA DE PRUEBA ' || i || '-' || FLOOR(RANDOM() * 10000);
+
+--         -- Insertar en la tabla de solicitud_error
+--         INSERT INTO solicitud_error(
+--             titulo_error, 
+--             descripcion_error, 
+--             fecha_publicacion,  -- Usamos la fecha estándar en formato 'YYYY-MM-DD'
+--             id_estado, 
+--             id_topico, 
+--             rut_usuario
+--         )
+--         VALUES(
+--             titulo_error,  -- Título de error único
+--             'Descripción error EXTRA DE PRUEBA ' || i,
+--             f,  -- Fecha de publicación (sin formato explícito, es de tipo DATE)
+--             est,
+--             top, 
+--             '21836702-0'  -- Rut del usuario
+--         );
+--     END LOOP;
+-- END;
+-- $$;
+
+-- -- =====================================
+-- -- Inserción de la solicitud 26 de FUNCIONALIDAD
+-- -- =====================================
+
+-- DO $$ 
+-- DECLARE 
+--     i INT := 26;
+--     est INT;
+--     top INT;
+--     amb INT;
+--     f DATE := CURRENT_DATE;
+-- BEGIN
+--     -- Inserción de la solicitud número 26 de funcionalidad
+--     SELECT id_estado INTO est 
+--     FROM estado 
+--     WHERE nombre_estado <> 'Archivado' 
+--     ORDER BY random() LIMIT 1;
+
+--     SELECT id_topico INTO top FROM topico ORDER BY random() LIMIT 1;
+--     SELECT id_ambiente INTO amb FROM ambiente_desarrollo ORDER BY random() LIMIT 1;
+
+--     -- Insertar en la tabla de solicitud_funcionalidad
+--     INSERT INTO solicitud_funcionalidad(
+--         titulo_funcionalidad, 
+--         id_estado, 
+--         resumen_funcionalidad,
+--         id_topico, 
+--         rut_usuario, 
+--         id_ambiente, 
+--         fecha_publicacion
+--     ) 
+--     VALUES(
+--         'Funcionalidad EXTRA DE PRUEBA ' || i || ' con título suficientemente largo',
+--         est,
+--         'Resumen de funcionalidad EXTRA DE PRUEBA ' || i,
+--         top, 
+--         '21836702-0',  -- Rut del usuario
+--         amb, 
+--         f  -- Fecha de publicación (cambiada al día siguiente)
+--     );
+-- END;
+-- $$;
+
+-- -- =====================================
+-- -- Inserción de la solicitud 26 de ERROR
+-- -- =====================================
+
+-- DO $$ 
+-- DECLARE 
+--     i INT := 26;
+--     est INT;
+--     top INT;
+--     titulo_error TEXT;
+--     f DATE := CURRENT_DATE;
+-- BEGIN
+    
+--     SELECT id_estado INTO est 
+--     FROM estado 
+--     WHERE nombre_estado <> 'Archivado' 
+--     ORDER BY random() LIMIT 1;
+
+--     SELECT id_topico INTO top FROM topico ORDER BY random() LIMIT 1;
+
+    
+--     titulo_error := 'Error EXTRA DE PRUEBA ' || i || '-' || FLOOR(RANDOM() * 10000);
+
+    
+--     INSERT INTO solicitud_error(
+--         titulo_error, 
+--         descripcion_error, 
+--         fecha_publicacion, 
+--         id_estado, 
+--         id_topico, 
+--         rut_usuario
+--     )
+--     VALUES(
+--         titulo_error,  -- Título de error único
+--         'Descripción error EXTRA DE PRUEBA ' || i,
+--         f,  -- Fecha de publicación (cambiada al día siguiente)
+--         est,
+--         top, 
+--         '21836702-0'  -- Rut del usuario
+--     );
+-- END;
+-- $$;
