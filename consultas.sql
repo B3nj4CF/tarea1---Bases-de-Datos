@@ -119,16 +119,26 @@ SELECT u.nombre_usuario,
        (SELECT COUNT(*) FROM solicitud_funcionalidad f WHERE f.rut_usuario = u.rut_usuario) AS total_solicitudes
 FROM usuario u;
 
-
 -- =====================================
--- PRUEBA PERSONAL
--- Ingenieros con exactamente 2 especialidades
+-- Eliminar solicitudes de error con más de 5 anos y mostrar en terminal
 -- =====================================
 
-SELECT '===== Tabla: PRUEBA - Ingenieros con exactamente 2 especialidades =====' AS info;
+-- SELECT '===== Tabla: Eliminar solicitudes de error con mas de 5 anos y mostrar en terminal =====' AS info;
 
-SELECT i.nombre_ingeniero
-FROM ingeniero i
-JOIN ingeniero_especialidad ie ON i.rut_ingeniero = ie.rut_ingeniero
-GROUP BY i.nombre_ingeniero
-HAVING COUNT(ie.id_especialidad) = 2;
+-- -- Eliminar y mostrar los errores antiguos (más de 5 años y no archivados)
+
+
+-- DELETE FROM asignar_error
+-- WHERE id_error IN (
+--     SELECT id_error
+--     FROM solicitud_error
+--     WHERE fecha_publicacion <= CURRENT_DATE - INTERVAL '5 YEAR'
+--       AND id_estado IN (SELECT id_estado FROM estado WHERE nombre_estado != 'Archivado')
+-- );
+
+-- DELETE FROM solicitud_error
+-- USING estado e_ant
+-- WHERE solicitud_error.id_estado = e_ant.id_estado
+--     AND solicitud_error.fecha_publicacion <= CURRENT_DATE - INTERVAL '5 YEAR'
+--     AND e_ant.nombre_estado != 'Archivado'
+-- RETURNING solicitud_error.id_error, solicitud_error.titulo_error, solicitud_error.fecha_publicacion;

@@ -217,7 +217,7 @@ BEGIN
 
         SELECT id_topico INTO top FROM topico ORDER BY random() LIMIT 1;
 
-        f := DATE '2021-01-01' + (random() * (CURRENT_DATE - DATE '2021-01-01'))::int;
+        f := DATE '2019-01-01' + (random() * (CURRENT_DATE - DATE '2019-01-01'))::int;
 
         INSERT INTO solicitud_error(
             titulo_error,
@@ -257,8 +257,8 @@ BEGIN
         SELECT id_topico INTO top FROM topico ORDER BY random() LIMIT 1;
         SELECT id_ambiente INTO amb FROM ambiente_desarrollo ORDER BY random() LIMIT 1;
         
-        f := DATE '2021-01-01' + (random() * (CURRENT_DATE - DATE '2021-01-01'))::int;
-
+        f := DATE '2019-01-01' + (random() * (CURRENT_DATE - DATE '2019-01-01'))::int;
+        
         INSERT INTO solicitud_funcionalidad(
             titulo_funcionalidad,id_estado,resumen_funcionalidad,
             id_topico,rut_usuario,id_ambiente,fecha_publicacion

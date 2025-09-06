@@ -54,6 +54,11 @@ Para ejecutar correctamente la tarea y trabajar con la base de datos en PostgreS
     \i revisar_contenidos.sql
     ```
 
+### Nota Importante
+- En la solicitud de `Eliminar solicitudes de error con más de 5 años` (La cual se encuentra al final del archivo), esta se encuentra comentada ya que elimina los datos del años solicita, lo que borra datos que se encuentran en las tablas anteriores y posteriores.
+- Se recomienda ejecutar `consultas.sql` tal como viene por defecto y luego repetir los pasos `2.-`, `3.-`, `4.-` nuevamente, pero descomentando la sección previamente mencionada.
+- Así, el código elimina las solicitudes de más de 5 años y funciona de la mejor manera.
+
 ### 6. Notas Adicionales
 
 - Puede ejecutar cada archivo de manera individual desde la terminal de PostgreSQL usando el comando `\i nombre_del_archivo.sql`.
