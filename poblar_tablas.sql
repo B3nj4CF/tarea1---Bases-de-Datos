@@ -47,7 +47,10 @@ INSERT INTO estado (nombre_estado) VALUES
 ('Archivado');
 
 
--- 50 usuarios
+-- =====================
+-- Tabla: Usuario
+-- =====================
+
 INSERT INTO usuario (rut_usuario, nombre_usuario, email_usuario) VALUES
 ('18456327-5', 'Juan Soto', 'juan.soto@email.com'),
 ('29518436-2', 'Maria Rojas', 'maria.rojas@email.com'),
@@ -100,7 +103,10 @@ INSERT INTO usuario (rut_usuario, nombre_usuario, email_usuario) VALUES
 ('49535468-8', 'Javier Soto', 'javier.soto@email.com'),
 ('50646579-7', 'Monica Salas', 'monica.salas.salasar@email.com');
 
--- 50 ingenieros
+-- =====================
+-- Tabla: Ingeniero
+-- =====================
+
 INSERT INTO ingeniero (rut_ingeniero, nombre_ingeniero, email_ingeniero) VALUES
 ('18456327-6', 'Juan Paredes', 'juan.paredes@email.com'),
 ('29518436-3', 'Maria Guzman', 'maria.guzman@email.com'),
@@ -154,7 +160,7 @@ INSERT INTO ingeniero (rut_ingeniero, nombre_ingeniero, email_ingeniero) VALUES
 ('50646579-8', 'Monica Vargas', 'monica.vargas@email.com');
 
 -- ======================================================
--- POBLACIÓN DINÁMICA RESPETANDO TRIGGERS
+-- POBLACIÓN Y TRIGGERS
 -- ======================================================
 
 -- =====================
@@ -184,17 +190,6 @@ BEGIN
             VALUES(ing.rut_ingeniero,pick);
         END LOOP;
     END LOOP;
-END$$;
-
--- =====================
--- Función helper: fecha random
--- =====================
-CREATE OR REPLACE FUNCTION rand_date(d1 DATE,d2 DATE)
-RETURNS DATE LANGUAGE plpgsql AS $$
-DECLARE span INT;
-BEGIN
-    span := (d2-d1);
-    RETURN d1 + floor(random()*(span+1))::INT;
 END$$;
 
 -- =====================
@@ -258,7 +253,7 @@ BEGIN
         SELECT id_ambiente INTO amb FROM ambiente_desarrollo ORDER BY random() LIMIT 1;
         
         f := DATE '2019-01-01' + (random() * (CURRENT_DATE - DATE '2019-01-01'))::int;
-        
+
         INSERT INTO solicitud_funcionalidad(
             titulo_funcionalidad,id_estado,resumen_funcionalidad,
             id_topico,rut_usuario,id_ambiente,fecha_publicacion
@@ -285,7 +280,7 @@ BEGIN
 END$$;
 
 -- =====================
--- Helper: elegir ingenieros disponibles
+-- Elegir ingenieros disponibles
 -- =====================
 CREATE OR REPLACE FUNCTION pick_ingenieros(_id_topico INT)
 RETURNS TABLE(rut TEXT) LANGUAGE sql AS $$

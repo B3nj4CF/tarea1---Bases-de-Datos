@@ -64,5 +64,5 @@ Para ejecutar correctamente la tarea y trabajar con la base de datos en PostgreS
 - Puede ejecutar cada archivo de manera individual desde la terminal de PostgreSQL usando el comando `\i nombre_del_archivo.sql`.
 - Asegúrese de ejecutar los archivos en el orden indicado para evitar errores de dependencias entre tablas y datos.
 - Dentro de `consultas.sql` en la consulta de `Ingenieros especialistas en un tópico específico (ej. 'Seguridad')` se encuentra la siguiente linea `WHERE e.nombre_especialidad = 'Seguridad'` se puede remplazar seguridad por `Backend`, `UX/UI`, `Mobile`, `Frontend`
+- - Dentro de `consultas.sql` en la consulta de `Funcionalidades nuevas para el ambiente “Móvil”` se encuentra la siguiente linea `WHERE a.nombre_ambiente = 'Movil'` se puede remplazar Movil por `Web`, `Movil`, `Escritorio`, `Cloud`
 ---
-
