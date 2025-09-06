@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS solicitud_funcionalidad (
     fecha_publicacion DATE NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS solicitud_error(
+CREATE TABLE IF NOT EXISTS solicitud_error (
     id_error SERIAL PRIMARY KEY,
     titulo_error VARCHAR(100) NOT NULL UNIQUE,
     descripcion_error VARCHAR(200) NOT NULL,

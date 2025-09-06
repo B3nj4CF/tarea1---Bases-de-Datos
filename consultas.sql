@@ -18,7 +18,7 @@ HAVING COUNT(*) > 5;
 -- =====================================
 
 SELECT '===== Tabla: Los 10 errores mas antiguos =====' AS info;
-SELECT e.titulo_error, e.fecha_publicacion, u.nombre_usuario
+SELECT e.titulo_error, TO_CHAR(e.fecha_publicacion, 'DD-MM-YYYY') AS fecha_publicacion, u.nombre_usuario
 FROM solicitud_error e
 JOIN usuario u ON e.rut_usuario = u.rut_usuario
 ORDER BY e.fecha_publicacion ASC
@@ -29,7 +29,7 @@ LIMIT 10;
 -- =====================================
 
 SELECT '===== Tabla: Funcionalidades nuevas para el ambiente (''Móvil'') =====' AS info;
-SELECT f.titulo_funcionalidad, t.nombre_topico, u.nombre_usuario, a.nombre_ambiente
+SELECT f.titulo_funcionalidad, t.nombre_topico, u.nombre_usuario, a.nombre_ambiente, TO_CHAR(f.fecha_publicacion, 'DD-MM-YYYY') AS fecha_publicacion
 FROM solicitud_funcionalidad f
 JOIN topico t ON f.id_topico = t.id_topico
 JOIN usuario u ON f.rut_usuario = u.rut_usuario
@@ -70,7 +70,7 @@ WHERE EXISTS (
 SELECT 
     f.id_funcionalidad, 
     f.titulo_funcionalidad, 
-    f.fecha_publicacion,
+    TO_CHAR(f.fecha_publicacion, 'DD-MM-YYYY') AS fecha_publicacion,
     e_ant.nombre_estado AS estado_antiguo, 
     'Archivado' AS estado_nuevo
 FROM 
@@ -123,7 +123,7 @@ FROM usuario u;
 -- Eliminar solicitudes de error con más de 5 anos
 -- =====================================
 
--- SELECT '===== Tabla: Eliminar solicitudes de error con mas de 5 anos  =====' AS info;
+-- SELECT '===== Tabla: Eliminar solicitudes de error con mas de 5 años =====' AS info;
 
 -- DELETE FROM asignar_error
 -- WHERE id_error IN (
@@ -136,4 +136,6 @@ FROM usuario u;
 -- USING estado e_ant
 -- WHERE solicitud_error.id_estado = e_ant.id_estado
 --     AND solicitud_error.fecha_publicacion <= CURRENT_DATE - INTERVAL '5 YEAR'
--- RETURNING solicitud_error.id_error, solicitud_error.titulo_error, solicitud_error.fecha_publicacion;
+-- RETURNING solicitud_error.id_error, 
+--            solicitud_error.titulo_error, 
+--            TO_CHAR(solicitud_error.fecha_publicacion, 'DD-MM-YYYY') AS fecha_publicacion;

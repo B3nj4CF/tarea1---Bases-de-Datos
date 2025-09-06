@@ -46,9 +46,8 @@ INSERT INTO estado (nombre_estado) VALUES
 ('Cerrado'),
 ('Archivado');
 
-
 -- =====================
--- Tabla: Usuario
+-- 50 usuarios
 -- =====================
 
 INSERT INTO usuario (rut_usuario, nombre_usuario, email_usuario) VALUES
@@ -104,7 +103,7 @@ INSERT INTO usuario (rut_usuario, nombre_usuario, email_usuario) VALUES
 ('50646579-7', 'Monica Salas', 'monica.salas.salasar@email.com');
 
 -- =====================
--- Tabla: Ingeniero
+-- 50 ingenieros
 -- =====================
 
 INSERT INTO ingeniero (rut_ingeniero, nombre_ingeniero, email_ingeniero) VALUES
@@ -160,7 +159,7 @@ INSERT INTO ingeniero (rut_ingeniero, nombre_ingeniero, email_ingeniero) VALUES
 ('50646579-8', 'Monica Vargas', 'monica.vargas@email.com');
 
 -- ======================================================
--- POBLACIÓN Y TRIGGERS
+-- POBLACIÓN DINÁMICA RESPETANDO TRIGGERS
 -- ======================================================
 
 -- =====================
@@ -193,6 +192,17 @@ BEGIN
 END$$;
 
 -- =====================
+-- Función helper: fecha random
+-- =====================
+CREATE OR REPLACE FUNCTION rand_date(d1 DATE,d2 DATE)
+RETURNS DATE LANGUAGE plpgsql AS $$
+DECLARE span INT;
+BEGIN
+    span := (d2-d1);
+    RETURN d1 + floor(random()*(span+1))::INT;
+END$$;
+
+-- =====================
 -- Insertar 300 errores
 -- =====================
 DO $$
@@ -212,7 +222,7 @@ BEGIN
 
         SELECT id_topico INTO top FROM topico ORDER BY random() LIMIT 1;
 
-        f := DATE '2019-01-01' + (random() * (CURRENT_DATE - DATE '2019-01-01'))::int;
+        f := DATE '2021-01-01' + (random() * (CURRENT_DATE - DATE '2021-01-01'))::int;
 
         INSERT INTO solicitud_error(
             titulo_error,
@@ -252,7 +262,7 @@ BEGIN
         SELECT id_topico INTO top FROM topico ORDER BY random() LIMIT 1;
         SELECT id_ambiente INTO amb FROM ambiente_desarrollo ORDER BY random() LIMIT 1;
         
-        f := DATE '2019-01-01' + (random() * (CURRENT_DATE - DATE '2019-01-01'))::int;
+        f := DATE '2021-01-01' + (random() * (CURRENT_DATE - DATE '2021-01-01'))::int;
 
         INSERT INTO solicitud_funcionalidad(
             titulo_funcionalidad,id_estado,resumen_funcionalidad,
@@ -280,7 +290,7 @@ BEGIN
 END$$;
 
 -- =====================
--- Elegir ingenieros disponibles
+-- Helper: elegir ingenieros disponibles
 -- =====================
 CREATE OR REPLACE FUNCTION pick_ingenieros(_id_topico INT)
 RETURNS TABLE(rut TEXT) LANGUAGE sql AS $$
